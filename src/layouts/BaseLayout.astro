@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro'
 const title = 'Hello Astro'
 
 ---
-<html lang="en">
+<html lang="en" class="h-full">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,8 +14,11 @@ const title = 'Hello Astro'
 		<title>Astro Test</title>
 
 	</head>
-	<body>
+	<body class="h-full">
 		<Navigator></Navigator>
+        <main>
+            <slot></slot>
+        </main>
         <Footer />
 	</body>
 </html>
