@@ -3,14 +3,20 @@ import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props
 ---
 <BaseLayout>
-    <h1>
-        {frontmatter.title}
-    </h1>
-    <img src=`${frontmatter.hero.src}` alt="">
+    <h2 class="text-4xl font-bold mb-5">{frontmatter.title}</h2>
     <div>
-        {frontmatter.pubDate}
+        <img src=`${frontmatter.hero.src}` alt=`${frontmatter.hero.alt}` class="w-full h-full object-cover aspect-video rounded-xl">
+    </div>
+    <div class="text-sm">
+        發布日期:{frontmatter.pubDate}
+    </div>
+    <div class="text-sm">
+        作者:{frontmatter.author}
+    </div>
+    <div class="my-5">
+        <slot />
     </div>
     <div>
-        {frontmatter.author}
+        <a href="/blog" class="font-bold text-indigo-500">文章列表</a>
     </div>
 </BaseLayout>
