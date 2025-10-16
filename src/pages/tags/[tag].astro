@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths(){
+    // const allPosts = Object.values(import.meta.glob('../blog/posts/*.md',{eager:true}))
+    return [
+        {
+            params: {
+                tag: '運動'
+            }
+        },
+        {
+            params: {
+                tag: '娛樂'
+            }
+        },
+        {
+            params: {
+                tag: 'test'
+            }
+        }
+    ]
+}
+
+const {tag} = Astro.params
+
+---
+<BaseLayout>
+    <div>{tag}</div>
+</BaseLayout>
