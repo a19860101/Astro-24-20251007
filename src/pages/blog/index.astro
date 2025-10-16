@@ -7,7 +7,7 @@ const allPosts = Object.values(import.meta.glob('./posts/*.md',{eager:true}))
 <BaseLayout>
     <section class="grid grid-cols-3 gap-8 mb-15">
         {
-            allPosts.map((post:any) => <Card />)
+            allPosts.map((post:any) => <Card url={post.url} data={post.frontmatter} />)
         }
     </section>
 
