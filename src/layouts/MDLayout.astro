@@ -8,10 +8,15 @@ const { frontmatter } = Astro.props
         <img src=`${frontmatter.hero.src}` alt=`${frontmatter.hero.alt}` class="w-full h-full object-cover aspect-video rounded-xl">
     </div>
     <div class="text-sm">
-        發布日期:{frontmatter.pubDate}
+        發布日期:{frontmatter.pubDate.slice(0,10)}
     </div>
     <div class="text-sm">
         作者:{frontmatter.author}
+    </div>
+    <div class="text-sm flex gap-2">
+        標籤: {
+            frontmatter.tags.map((t:any) => <a href="#" class="bg-amber-300 text-sm rounded-xl px-3">{t}</a>)
+        }
     </div>
     <div class="my-5 [&>p]:mb-8 leading-8">
         <slot />
