@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props
     <div class="text-sm">
         作者:{frontmatter.author}
     </div>
-    <div class="my-5 ">
+    <div class="my-5 [&>p]:mb-8 leading-8">
         <slot />
     </div>
     <div>
