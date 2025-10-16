@@ -9,5 +9,9 @@ const {data, url} = Astro.props
     <!-- <div>
         {data.desc}
     </div> -->
+    <div class="text-sm text-zinc-400">
+        {data.author}<br>
+        {data.pubDate.slice(0,10)}
+    </div>
     <a href=`${url}` class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
 </div>
