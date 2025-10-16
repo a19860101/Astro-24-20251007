@@ -1,44 +1,30 @@
 ---
-import '../styles/global.css'
+import BaseLayout from "../layouts/BaseLayout.astro"
+const allPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
 
-const title = 'Hello Astro'
-const data = ['apple','ball','cat','dog']
-const drinks = [
-	{
-		name: '紅茶',
-		price: 40
-	},
-	{
-		name:'綠茶',
-		price: 40
-	},
-	{
-		name:'奶茶',
-		price: 50
-	}
-]
+const tags = allPosts.map((post:any) => post.frontmatter.tags).flat()
+const uniqueTags = new Set(tags)
+const uniqueTagsArray = [...new Set(tags)]
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-
-	</head>
-	<body>
-		<nav class="w-full bg-violet-900 flex justify-center gap-4 py-5 *:text-yellow-300 *:font-bold">
-			<a href="/">首頁</a>
-			<a href="/about">關於</a>
-			<a href="/contact">聯絡我</a>
-		</nav>
-		<h1>{title}</h1>
-		<div>
-			{
-				drinks.map(d=><div class="text-red-400">{d.name} ${d.price}元</div>)
-			}
-		</div>
-	</body>
-</html>
+<BaseLayout>
+	<div>
+		{
+			uniqueTagsArray
+		}
+	</div>
+	<div>
+		{
+			uniqueTags
+		}
+	</div>
+</BaseLayout>
+<script>
+	const a = [
+		['運動','台灣大賽','棒球'],
+		['運動','佐佐木朗希','道奇','棒球']
+	]
+	console.log(a)
+	console.log(a.flat())
+	console.log(new Set(a.flat()))
+	console.log([...new Set(a.flat())])
+</script>
