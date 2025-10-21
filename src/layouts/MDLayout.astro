@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Tag from "../components/Tag.astro";
 const { frontmatter } = Astro.props
 ---
 <BaseLayout>
@@ -15,7 +16,7 @@ const { frontmatter } = Astro.props
     </div>
     <div class="text-sm flex gap-2">
         標籤: {
-            frontmatter.tags.map((t:any) => <a href="#" class="bg-amber-300 text-sm rounded-xl px-3">{t}</a>)
+            frontmatter.tags.map((tag:any)=> <Tag tag={tag} />)
         }
     </div>
     <div class="my-5 [&>p]:mb-8 leading-8">

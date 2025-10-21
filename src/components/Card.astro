@@ -1,4 +1,5 @@
 ---
+import Tag from "./Tag.astro"
 const {data, url} = Astro.props
 ---
 <div class="flex flex-col items-start gap-4">
@@ -10,7 +11,7 @@ const {data, url} = Astro.props
         {data.desc}
     </div> -->
     <div class="flex gap-2">
-        {data.tags.map((tag:any)=><a href=`tags/${tag}` class="bg-amber-300 text-sm rounded-xl px-3">{tag}</a>)}
+        {data.tags.map((tag:any)=> <Tag tag={tag} />)}
     </div>
     <div class="text-sm text-zinc-400">
         {data.author}<br>
