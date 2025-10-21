@@ -1,5 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import Card from '../components/Card.astro'
+const allPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
+
+const newPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
+newPosts.length = 3
+
+const featurePosts = allPosts.filter((post:any)=>post.frontmatter.feature == true)
 
 ---
 <BaseLayout>
@@ -8,70 +15,15 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 	</header>
 	<h2 class="text-3xl text-center font-bold mb-5">最新文章</h2>
 	<section class="grid grid-cols-3 gap-8 mb-15">
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
+		{
+			newPosts.map((post:any)=><Card data={post.frontmatter} url={post.url}/>)
+		}
 		
 	</section>
 	<h2 class="text-3xl text-center font-bold mb-5">推薦文章</h2>
-	<section class="grid grid-cols-3 gap-8 mb-5">
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
-		<div class="flex flex-col items-start gap-4">
-			<div>
-				<img src="https://picsum.photos/id/40/400/300" alt="" class="w-full h-full object-cover aspect-video rounded-xl">
-			</div>
-			<h3 class="text-2xl font-bold">title</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque repellendus dignissimos repudiandae at voluptatem consequatur ullam alias esse magni.
-			</p>
-			<a href="#" class="text-sm px-5 py-2 bg-indigo-500 text-indigo-50 rounded">繼續閱讀</a>
-		</div>
-		
+	<section class="grid grid-cols-3 gap-8 mb-15">
+		{
+			featurePosts.map((post:any)=><Card data={post.frontmatter} url={post.url}/>)
+		}
 	</section>
 </BaseLayout>
