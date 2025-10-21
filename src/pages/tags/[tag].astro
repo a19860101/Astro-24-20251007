@@ -1,6 +1,6 @@
 ---
-import { union } from "astro:schema";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
 
 export function getStaticPaths(){
     const allPosts = Object.values(import.meta.glob('../blog/posts/*.md',{eager:true}))
@@ -42,10 +42,12 @@ const {posts} = Astro.props
 
 ---
 <BaseLayout>
-    <div>{tag}</div>
-    <div>
-        {
-            posts.map((post:any) => <div>{post.frontmatter.title}</div>)
-        }
+    <div class="text-center mb-5 text-xl font-bold">
+        標籤為<span class="text-amber-400 font-bold">{tag}</span>的文章
     </div>
+    <section class="grid grid-cols-3 gap-8 mb-15">
+        {
+            posts.map((post:any) => <Card data={post.frontmatter} url={post.url} />)
+        }
+    </section>
 </BaseLayout>
