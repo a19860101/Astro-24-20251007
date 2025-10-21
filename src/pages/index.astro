@@ -4,6 +4,10 @@ import Card from '../components/Card.astro'
 const allPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
 
 const newPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
+newPosts.sort((b:any, a:any) => 
+	a.frontmatter.pubDate.localeCompare(b.frontmatter.pubDate) ||
+	b.frontmatter.pubDate.localeCompare(a.frontmatter.pubDate)
+)
 newPosts.length = 3
 
 const featurePosts = allPosts.filter((post:any)=>post.frontmatter.feature == true)
