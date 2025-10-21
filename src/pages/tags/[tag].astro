@@ -7,9 +7,13 @@ export function getStaticPaths(){
     const uniqueTags = [...new Set(allPosts.map((post:any) => post.frontmatter.tags).flat())]
     
     return uniqueTags.map((tag:any) => {
+        const filterPosts = allPosts.filter((post:any)=>post.frontmatter.tags.includes(tag))
         return {
             params: {
                 tag: tag
+            },
+            props: {
+                posts: filterPosts
             }
         }
     })
@@ -34,8 +38,14 @@ export function getStaticPaths(){
 }
 
 const {tag} = Astro.params
+const {posts} = Astro.props
 
 ---
 <BaseLayout>
     <div>{tag}</div>
+    <div>
+        {
+            posts.map((post:any) => <div>{post.frontmatter.title}</div>)
+        }
+    </div>
 </BaseLayout>

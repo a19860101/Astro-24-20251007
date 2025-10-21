@@ -5,17 +5,19 @@ const allPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}
 const tags = allPosts.map((post:any) => post.frontmatter.tags).flat()
 const uniqueTags = new Set(tags)
 const uniqueTagsArray = [...new Set(tags)]
+
+const filterPosts = allPosts.filter((post:any) => post.frontmatter.tags.includes('娛樂'))
 ---
 <BaseLayout>
 	<div>
 		{
-			uniqueTagsArray
+			filterPosts.map((post:any) => <div>{post.frontmatter.title}</div>)
 		}
 	</div>
 	<div>
-		{
+		<!-- {
 			uniqueTags
-		}
+		} -->
 	</div>
 </BaseLayout>
 <script>
