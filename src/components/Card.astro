@@ -10,7 +10,7 @@ const {data, url} = Astro.props
     <!-- <div>
         {data.desc}
     </div> -->
-    <div class="flex gap-2">
+    <div class="flex gap-2 flex-wrap">
         {data.tags.map((tag:any)=> <Tag tag={tag} />)}
     </div>
     <div class="text-sm text-zinc-400">
