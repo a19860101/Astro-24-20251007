@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Card from '../components/Card.astro'
+import Tag from '../components/Tag.astro'
 const allPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
 
 const newPosts = Object.values(import.meta.glob('./blog/posts/*.md',{eager:true}))
@@ -12,11 +13,20 @@ newPosts.length = 3
 
 const featurePosts = allPosts.filter((post:any)=>post.frontmatter.feature == true)
 
+const uniqueTags = [...new Set(allPosts.map((post:any) => post.frontmatter.tags).flat())]
+
+
 ---
 <BaseLayout>
 	<header class="mb-5">
 		<img src="/images/header.jpg" alt="" class="w-full h-full object-cover rounded-xl">
 	</header>
+	<h2 class="text-3xl text-center font-bold mb-5">文章標籤</h2>
+	<section class="flex gap-3 justify-center mb-15">
+		{
+			uniqueTags.map((tag:any) => <Tag tag={tag} />)
+		}
+	</section>
 	<h2 class="text-3xl text-center font-bold mb-5">最新文章</h2>
 	<section class="grid grid-cols-3 gap-8 mb-15">
 		{
